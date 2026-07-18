@@ -122,19 +122,6 @@ Includes AI-based nutrition and pricing assistance to support better user decisi
 
 <div align="center">
 
-
 <img src="./contrib-heatmap.svg" width="860" alt="199adarsh's GitHub contribution graph (Dec 2025 - Jul 2026)" />
-
-<img height="170" src="https://github-readme-stats.vercel.app/api?username=199adarsh&show_icons=true&hide_border=true&theme=transparent&title_color=A78BFA&icon_color=A78BFA"/>
-
-<img height="170" src="https://streak-stats.demolab.com/?user=199adarsh&hide_border=true&theme=transparent"/>
-
-</div>
-
-<br>
-
-<div align="center">
-
-
 
 </div>
