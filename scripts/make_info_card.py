@@ -30,7 +30,7 @@ ACCENT = "#22d3ee"
 ROWS = [
     ("host",),
     ("kv", "Role", "Software Engineer / AI Eng"),
-    ("kv", "Edu", "B.Tech AI & Data Science '27"),
+    ("kv", "Edu", "B.Tech AI & Data Science '28"),
     ("kv", "Focus", "Java, Spring Boot, React, RAG"),
     ("kv", "Build", "EduVault, QuizArena, Farm2Home"),
     ("gap",),
