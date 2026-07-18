@@ -1,6 +1,6 @@
 """
-Build a custom neofetch / terminal-style GitHub Stats Card SVG (860px wide)
-matching the exact design system (Courier New, terminal dots, dark gradient, glowing highlights).
+Build an Awwwards-level 3D glassmorphic GitHub Stats Card SVG (860px wide)
+with 3D bevels, metallic gradients, glowing neon counters, and stack percentages (Java, React, C++).
 """
 import html
 import json
@@ -10,39 +10,21 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(HERE, "..", "data", "contributions.json")
 OUT_PATH = os.path.join(HERE, "..", "stats-card.svg")
 
-W, H = 860, 260
-PAD = 24
-TITLEBAR_H = 32
-
-BG = "#0d1117"
-BG2 = "#111722"
-FRAME = "#1f6feb"
-MUTED = "#7d8590"
-INK = "#c9d1d9"
-KEY = "#ffa657"      # orange
-SECTION = "#58a6ff"  # blue
-GREEN = "#3fb950"
-ACCENT = "#22d3ee"
-GOLD = "#f2cc60"
-
+W, H = 860, 310
 
 def main():
     total_contribs = 553
     current_streak = 20
     longest_streak = 20
-    active_days = 81
     best_day_count = 44
-    best_day_date = "2026-01-11"
 
     if os.path.exists(DATA_PATH):
         try:
             data = json.load(open(DATA_PATH))
             days = data.get("days", [])
             total_contribs = data.get("total_contributions", sum(d["count"] for d in days))
-            active_days = data.get("active_days", sum(1 for d in days if d["count"] > 0))
             best = data.get("best_day", {})
             best_day_count = best.get("count", 44)
-            best_day_date = best.get("date", "2026-01-11")
             cs = data.get("current_streak", {})
             ls = data.get("longest_streak", {})
             current_streak = cs.get("length", 20)
@@ -50,101 +32,144 @@ def main():
         except Exception:
             pass
 
-    css = """
-@keyframes fade {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.row { animation: fade 0.4s ease-out forwards; }
-""".strip()
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="'Courier New', Courier, monospace">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#05070c" />
+    </linearGradient>
 
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-        f'font-family="\'Courier New\', Courier, monospace">',
-        f'<style>{css}</style>',
-        '<defs>',
-        f'<linearGradient id="sbg" x1="0" y1="0" x2="0" y2="1">',
-        f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient>',
-        '</defs>',
-        f'<rect width="{W}" height="{H}" rx="12" fill="url(#sbg)"/>',
-        f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" stroke="{FRAME}" stroke-opacity="0.5"/>',
-        f'<line x1="0" y1="{TITLEBAR_H}" x2="{W}" y2="{TITLEBAR_H}" stroke="{FRAME}" stroke-opacity="0.3"/>',
-    ]
+    <linearGradient id="glassBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#818cf8" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.6" />
+    </linearGradient>
 
-    for i, dotcol in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
-        parts.append(f'<circle cx="{PAD + i*16}" cy="{TITLEBAR_H/2}" r="5" fill="{dotcol}"/>')
+    <!-- Card 3D Bevel Gradients -->
+    <linearGradient id="cardBevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+    </linearGradient>
 
-    parts.append(f'<text x="{W/2}" y="{TITLEBAR_H/2 + 4}" fill="{MUTED}" font-size="12" '
-                 f'text-anchor="middle">199adarsh@github: ~$ github-analytics --summary</text>')
+    <linearGradient id="javaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff7b00" />
+      <stop offset="100%" stop-color="#ffae00" />
+    </linearGradient>
 
-    # 3 Column Layout inside card
-    # Col 1: Activity Stats (X=24, W=260)
-    # Col 2: Streaks & Highlights (X=300, W=260)
-    # Col 3: Tech Languages % Breakdown (X=580, W=250)
+    <linearGradient id="reactGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff" />
+      <stop offset="100%" stop-color="#3a7bd5" />
+    </linearGradient>
 
-    y0 = TITLEBAR_H + 35
+    <linearGradient id="cppGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
 
-    # Section Headers
-    parts.append(f'<text x="24" y="{y0}" fill="{SECTION}" font-size="13" font-weight="700">&#8212; ACTIVITY STATS</text>')
-    parts.append(f'<line x1="170" y1="{y0-4}" x2="270" y2="{y0-4}" stroke="{FRAME}" stroke-opacity="0.6"/>')
+    <!-- Glow Filters -->
+    <filter id="neonGlowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
 
-    parts.append(f'<text x="300" y="{y0}" fill="{SECTION}" font-size="13" font-weight="700">&#8212; STREAKS &amp; IMPACT</text>')
-    parts.append(f'<line x1="460" y1="{y0-4}" x2="550" y2="{y0-4}" stroke="{FRAME}" stroke-opacity="0.6"/>')
+    <filter id="neonGlowBlue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
 
-    parts.append(f'<text x="580" y="{y0}" fill="{SECTION}" font-size="13" font-weight="700">&#8212; TOP STACK SHARE</text>')
-    parts.append(f'<line x1="730" y1="{y0-4}" x2="836" y2="{y0-4}" stroke="{FRAME}" stroke-opacity="0.6"/>')
+    <filter id="shadow3d" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.75" />
+    </filter>
+  </defs>
 
-    # Rows Data
-    col1_rows = [
-        ("Total Contribs", f"{total_contribs:,}", ACCENT),
-        ("Active Days", f"{active_days} days", INK),
-        ("Best Day", f"{best_day_count} ({best_day_date})", GOLD),
-    ]
+  <!-- Outer Glass Frame with 3D Shadow -->
+  <rect x="10" y="10" width="{W-20}" height="{H-20}" rx="16" fill="url(#bgGlow)" filter="url(#shadow3d)" />
+  <rect x="10.5" y="10.5" width="{W-21}" height="{H-21}" rx="15.5" fill="none" stroke="url(#glassBorder)" stroke-width="1.5" />
 
-    col2_rows = [
-        ("Current Streak", f"{current_streak} days", GREEN),
-        ("Longest Streak", f"{longest_streak} days", GREEN),
-        ("Live Users", "200+ active", ACCENT),
-    ]
+  <!-- 3D Header Bar -->
+  <rect x="11" y="11" width="{W-22}" height="36" rx="15" fill="#1e293b" fill-opacity="0.6" />
+  <line x1="10" y1="47" x2="{W-10}" y2="47" stroke="#334155" stroke-opacity="0.5" />
 
-    col3_rows = [
-        ("Java / Spring", "38%", "#f89820"),
-        ("React / TS", "32%", "#61dafb"),
-        ("Python / AI", "20%", "#3572A5"),
-        ("C++ / C", "10%", "#f34b7d"),
-    ]
+  <!-- Mac Window Dots -->
+  <circle cx="32" cy="29" r="5" fill="#ff5f56" />
+  <circle cx="48" cy="29" r="5" fill="#ffbd2e" />
+  <circle cx="64" cy="29" r="5" fill="#27c93f" />
 
-    y = y0 + 32
-    for k, v, col in col1_rows:
-        parts.append(f'<text x="24" y="{y}" fill="{KEY}" font-size="12.5" font-weight="700">{html.escape(k)}</text>')
-        parts.append(f'<text x="160" y="{y}" fill="{col}" font-size="12.5" font-weight="700">{html.escape(v)}</text>')
-        y += 24
+  <text x="{W/2}" y="33" fill="#94a3b8" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1.5">199adarsh // EXECUTIVE ANALYTICS</text>
 
-    y = y0 + 32
-    for k, v, col in col2_rows:
-        parts.append(f'<text x="300" y="{y}" fill="{KEY}" font-size="12.5" font-weight="700">{html.escape(k)}</text>')
-        parts.append(f'<text x="440" y="{y}" fill="{col}" font-size="12.5" font-weight="700">{html.escape(v)}</text>')
-        y += 24
+  <!-- 3D Stat Cards Section (3 Main Highlighted Counter Boxes) -->
+  <!-- Box 1: Total Contributions -->
+  <g transform="translate(30, 65)">
+    <rect width="245" height="95" rx="12" fill="url(#cardBevel)" stroke="#334155" stroke-width="1" filter="url(#shadow3d)" />
+    <rect width="245" height="4" rx="2" fill="#22c55e" filter="url(#neonGlowGreen)" />
+    <text x="16" y="30" fill="#94a3b8" font-size="11" font-weight="700" letter-spacing="1">TOTAL CONTRIBUTIONS</text>
+    <text x="16" y="68" fill="#4ade80" font-size="32" font-weight="900" filter="url(#neonGlowGreen)">{total_contribs:,}</text>
+    <text x="145" y="66" fill="#64748b" font-size="11">in last 12 mos</text>
+  </g>
 
-    y = y0 + 32
-    for lang, pct, col in col3_rows:
-        parts.append(f'<circle cx="585" cy="{y-4}" r="4" fill="{col}"/>')
-        parts.append(f'<text x="598" y="{y}" fill="{INK}" font-size="12.5">{html.escape(lang)}</text>')
-        parts.append(f'<text x="836" y="{y}" fill="{col}" font-size="12.5" font-weight="700" text-anchor="end">{pct}</text>')
-        y += 24
+  <!-- Box 2: Max Streak -->
+  <g transform="translate(307, 65)">
+    <rect width="245" height="95" rx="12" fill="url(#cardBevel)" stroke="#334155" stroke-width="1" filter="url(#shadow3d)" />
+    <rect width="245" height="4" rx="2" fill="#38bdf8" filter="url(#neonGlowBlue)" />
+    <text x="16" y="30" fill="#94a3b8" font-size="11" font-weight="700" letter-spacing="1">MAX STREAK</text>
+    <text x="16" y="68" fill="#38bdf8" font-size="32" font-weight="900" filter="url(#neonGlowBlue)">{longest_streak}</text>
+    <text x="110" y="66" fill="#38bdf8" font-size="14" font-weight="700">DAYS</text>
+    <text x="165" y="66" fill="#64748b" font-size="11">(Best: {best_day_count}/day)</text>
+  </g>
 
-    # Footer line
-    y_foot = H - 20
-    parts.append(f'<line x1="24" y1="{y_foot-16}" x2="{W-24}" y2="{y_foot-16}" stroke="{FRAME}" stroke-opacity="0.3"/>')
-    parts.append(f'<text x="24" y="{y_foot}" fill="{GREEN}" font-size="12">&#9679; Status: Active &amp; Building</text>')
-    parts.append(f'<text x="{W-24}" y="{y_foot}" fill="{MUTED}" font-size="12" text-anchor="end">Auto-Refreshed Daily</text>')
+  <!-- Box 3: Current Streak -->
+  <g transform="translate(585, 65)">
+    <rect width="245" height="95" rx="12" fill="url(#cardBevel)" stroke="#334155" stroke-width="1" filter="url(#shadow3d)" />
+    <rect width="245" height="4" rx="2" fill="#a855f7" filter="url(#neonGlowGreen)" />
+    <text x="16" y="30" fill="#94a3b8" font-size="11" font-weight="700" letter-spacing="1">CURRENT STREAK</text>
+    <text x="16" y="68" fill="#c084fc" font-size="32" font-weight="900" filter="url(#neonGlowBlue)">{current_streak}</text>
+    <text x="110" y="66" fill="#c084fc" font-size="14" font-weight="700">DAYS</text>
+    <text x="175" y="66" fill="#22c55e" font-size="11" font-weight="700">&#9679; ACTIVE</text>
+  </g>
 
-    parts.append("</svg>")
-    svg = "".join(parts)
+  <!-- Language Stack Share Bar (Java, React, C++) -->
+  <g transform="translate(30, 185)">
+    <rect width="800" height="95" rx="12" fill="url(#cardBevel)" stroke="#334155" stroke-width="1" />
+    <text x="18" y="26" fill="#f8fafc" font-size="12" font-weight="700" letter-spacing="1">&#9889; CORE TECH STACK DISTRIBUTION</text>
+
+    <!-- Progress Bar Frame -->
+    <rect x="18" y="38" width="764" height="14" rx="7" fill="#0f172a" stroke="#1e293b" />
+    
+    <!-- Progress Bar Segments: Java (45%), React (35%), C++ (20%) -->
+    <rect x="18" y="38" width="343.8" height="14" rx="7" fill="url(#javaGrad)" />
+    <rect x="361.8" y="38" width="267.4" height="14" rx="0" fill="url(#reactGrad)" />
+    <rect x="629.2" y="38" width="152.8" height="14" rx="7" fill="url(#cppGrad)" />
+
+    <!-- Badges & Percentages Below Bar -->
+    <!-- Java -->
+    <circle cx="26" cy="72" r="5" fill="#ff7b00" />
+    <text x="38" y="76" fill="#f8fafc" font-size="12" font-weight="700">JAVA</text>
+    <text x="82" y="76" fill="#ffae00" font-size="12" font-weight="900">45%</text>
+
+    <!-- React -->
+    <circle cx="300" cy="72" r="5" fill="#00d2ff" />
+    <text x="312" y="76" fill="#f8fafc" font-size="12" font-weight="700">REACT</text>
+    <text x="365" y="76" fill="#38bdf8" font-size="12" font-weight="900">35%</text>
+
+    <!-- C++ -->
+    <circle cx="580" cy="72" r="5" fill="#ec4899" />
+    <text x="592" y="76" fill="#f8fafc" font-size="12" font-weight="700">C++</text>
+    <text x="630" y="76" fill="#c084fc" font-size="12" font-weight="900">20%</text>
+  </g>
+
+</svg>
+"""
     with open(OUT_PATH, "w", encoding="utf-8") as f:
         f.write(svg)
     print(f"wrote {OUT_PATH} ({len(svg)} bytes)")
-
 
 if __name__ == "__main__":
     main()
