@@ -124,4 +124,8 @@ Includes AI-based nutrition and pricing assistance to support better user decisi
 
 <img src="./contrib-heatmap.svg" width="860" alt="199adarsh's GitHub contribution graph (Dec 2025 - Jul 2026)" />
 
+<br><br>
+
+<img src="./stats-card.svg" width="860" alt="199adarsh's GitHub analytics & stack share" />
+
 </div>
