@@ -20,12 +20,22 @@
 
 </div>
 
----
+<br/>
 
 <div align="center">
 
 <h3><code>199adarsh@github ~ $ ./contributions.sh</code></h3>
 <img src="./contrib-heatmap.svg" width="860" />
+
+<br><br>
+
+<h3><code>199adarsh@github ~ $ whoami</code></h3>
+<table>
+  <tr>
+    <td valign="top"><img src="./adarsh-ascii.svg" width="370" /></td>
+    <td valign="top"><img src="./info-card.svg" width="490" /></td>
+  </tr>
+</table>
 
 </div>
 
@@ -57,15 +67,11 @@ const favorites = [
   <img src="https://skillicons.dev/icons?i=java,js,python,cpp,c,html,css" />
 </p>
 
-<!-- Future: ts, sql -->
-
 ### Frontend
 
 <p align="left">
   <img src="https://skillicons.dev/icons?i=react,vite,tailwind,figma" />
 </p>
-
-<!-- Future: nextjs -->
 
 ### Backend & Databases
 
@@ -73,15 +79,11 @@ const favorites = [
   <img src="https://skillicons.dev/icons?i=spring,flask,firebase" />
 </p>
 
-<!-- Future: nodejs, express, mysql, mongodb, postgres -->
-
 ### Cloud, DevOps & Tooling
 
 <p align="left">
   <img src="https://skillicons.dev/icons?i=git,github,vercel,netlify,vscode,idea" />
 </p>
-
-<!-- Future: linux, docker -->
 
 ## Featured Projects
 
@@ -167,9 +169,3 @@ Includes AI-based nutrition and pricing assistance to support better user decisi
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=199adarsh&layout=compact&hide_border=true&theme=transparent&title_color=A78BFA"/>
 
 </div>
-
-## Contribution Snake
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/199adarsh/199adarsh/output/github-contribution-grid-snake.svg">
-</p>

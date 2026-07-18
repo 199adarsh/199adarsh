@@ -1,0 +1,42 @@
+import os
+
+def create_info_card():
+    svg_content = """<svg xmlns="http://www.w3.org/2000/svg" width="490" height="370" viewBox="0 0 490 370">
+  <rect width="490" height="370" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <circle cx="20" cy="20" r="6" fill="#ff5f56"/>
+  <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="20" r="6" fill="#27c93f"/>
+  <text x="80" y="24" fill="#8b949e" font-size="13" font-family="monospace">199adarsh@profile:~</text>
+  <line x1="0" y1="40" x2="490" y2="40" stroke="#30363d" stroke-width="1"/>
+  
+  <g font-family="monospace" font-size="13">
+    <text x="20" y="75" fill="#58a6ff" font-weight="bold">USER</text>
+    <text x="120" y="75" fill="#c9d1d9">199adarsh (Adarsh Herwade)</text>
+
+    <text x="20" y="110" fill="#58a6ff" font-weight="bold">ROLE</text>
+    <text x="120" y="110" fill="#c9d1d9">Full Stack &amp; AI Data Science Eng</text>
+
+    <text x="20" y="145" fill="#58a6ff" font-weight="bold">STACK</text>
+    <text x="120" y="145" fill="#c9d1d9">Java, Spring Boot, React, Python</text>
+
+    <text x="20" y="180" fill="#58a6ff" font-weight="bold">AI/ML</text>
+    <text x="120" y="180" fill="#c9d1d9">GenAI, LLMs, RAG, Jsoup Scrapers</text>
+
+    <text x="20" y="215" fill="#58a6ff" font-weight="bold">PROJECTS</text>
+    <text x="120" y="215" fill="#c9d1d9">EduVault, QuizArena, Farm2Home</text>
+
+    <text x="20" y="250" fill="#58a6ff" font-weight="bold">STATS</text>
+    <text x="120" y="250" fill="#c9d1d9">200+ Live Users, 35% Latency Cut</text>
+
+    <text x="20" y="285" fill="#58a6ff" font-weight="bold">LINKS</text>
+    <text x="120" y="285" fill="#79c0ff">adarshherwade.netlify.app</text>
+
+    <text x="20" y="330" fill="#7ee787" font-weight="bold">● ONLINE</text>
+    <text x="120" y="330" fill="#8b949e">Building scalable apps &amp; AI</text>
+  </g>
+</svg>"""
+    with open("info-card.svg", "w", encoding="utf-8") as f:
+        f.write(svg_content)
+
+if __name__ == "__main__":
+    create_info_card()
