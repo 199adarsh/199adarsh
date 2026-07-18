@@ -2,7 +2,7 @@
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Courier+new&size=38&duration=2800&pause=1000&color=A78BFA&center=true&vCenter=true&width=860&lines=Adarsh+Herwade;Software+Engineer;Full+Stack+Developer;Java+%7C+Spring+Boot+%7C+React;Building+Useful+Products" alt="Typing SVG" />
 
-<br/><br/>
+<br/>
 
 <div align="center">
 
@@ -22,22 +22,7 @@
 
 <br/>
 
-<div align="center">
 
-<h3><code>199adarsh@github ~ $ ./contributions.sh</code></h3>
-<img src="./contrib-heatmap.svg" width="860" />
-
-<br><br>
-
-<h3><code>199adarsh@github ~ $ whoami</code></h3>
-<table>
-  <tr>
-    <td valign="top"><img src="./adarsh-ascii.svg" width="370" /></td>
-    <td valign="top"><img src="./info-card.svg" width="490" /></td>
-  </tr>
-</table>
-
-</div>
 
 ---
 
@@ -59,31 +44,12 @@ const favorites = [
 ];
 ```
 
-## Tech Stack
+<div align="center">
 
-### Languages
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=java,js,python,cpp,c,html,css" />
-</p>
+<img src="./info-card.svg" width="860" alt="Adarsh Herwade — experience, stack, highlights" />
 
-### Frontend
-
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=react,vite,tailwind,figma" />
-</p>
-
-### Backend & Databases
-
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=spring,flask,firebase" />
-</p>
-
-### Cloud, DevOps & Tooling
-
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=git,github,vercel,netlify,vscode,idea" />
-</p>
+</div>
 
 ## Featured Projects
 
@@ -156,6 +122,9 @@ Includes AI-based nutrition and pricing assistance to support better user decisi
 
 <div align="center">
 
+
+<img src="./contrib-heatmap.svg" width="860" alt="199adarsh's GitHub contribution graph (Dec 2025 - Jul 2026)" />
+
 <img height="170" src="https://github-readme-stats.vercel.app/api?username=199adarsh&show_icons=true&hide_border=true&theme=transparent&title_color=A78BFA&icon_color=A78BFA"/>
 
 <img height="170" src="https://github-readme-streak-stats.herokuapp.com/?user=199adarsh&hide_border=true&theme=transparent"/>
@@ -166,6 +135,6 @@ Includes AI-based nutrition and pricing assistance to support better user decisi
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=199adarsh&layout=compact&hide_border=true&theme=transparent&title_color=A78BFA"/>
+
 
 </div>

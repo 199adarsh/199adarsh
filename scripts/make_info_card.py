@@ -1,42 +1,113 @@
+"""
+Build a neofetch-style info card SVG to sit to the RIGHT of
+the ASCII portrait: colored key/value rows for work experience, tech stack, and
+highlights.
+"""
+import html
 import os
 
-def create_info_card():
-    svg_content = """<svg xmlns="http://www.w3.org/2000/svg" width="490" height="370" viewBox="0 0 490 370">
-  <rect width="490" height="370" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
-  <circle cx="20" cy="20" r="6" fill="#ff5f56"/>
-  <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
-  <circle cx="60" cy="20" r="6" fill="#27c93f"/>
-  <text x="80" y="24" fill="#8b949e" font-size="13" font-family="monospace">199adarsh@profile:~</text>
-  <line x1="0" y1="40" x2="490" y2="40" stroke="#30363d" stroke-width="1"/>
-  
-  <g font-family="monospace" font-size="13">
-    <text x="20" y="75" fill="#58a6ff" font-weight="bold">USER</text>
-    <text x="120" y="75" fill="#c9d1d9">199adarsh (Adarsh Herwade)</text>
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, "..", "info-card.svg")
+STATIC = bool(os.environ.get("STATIC"))
 
-    <text x="20" y="110" fill="#58a6ff" font-weight="bold">ROLE</text>
-    <text x="120" y="110" fill="#c9d1d9">Full Stack &amp; AI Data Science Eng</text>
+W, H = 860, 376
+PAD = 24
+TITLEBAR_H = 32
+KEY_X = PAD
+VAL_X = PAD + 130
+LINE_H = 20.5
 
-    <text x="20" y="145" fill="#58a6ff" font-weight="bold">STACK</text>
-    <text x="120" y="145" fill="#c9d1d9">Java, Spring Boot, React, Python</text>
+BG = "#0d1117"
+BG2 = "#111722"
+FRAME = "#30363d"
+MUTED = "#7d8590"
+INK = "#c9d1d9"
+KEY = "#ffa657"      # orange keys
+SECTION = "#58a6ff"  # blue section headers
+GREEN = "#3fb950"
+ACCENT = "#22d3ee"
 
-    <text x="20" y="180" fill="#58a6ff" font-weight="bold">AI/ML</text>
-    <text x="120" y="180" fill="#c9d1d9">GenAI, LLMs, RAG, Jsoup Scrapers</text>
+ROWS = [
+    ("host",),
+    ("kv", "Role", "Software Engineer / AI Eng"),
+    ("kv", "Edu", "B.Tech AI & Data Science '27"),
+    ("kv", "Focus", "Java, Spring Boot, React, RAG"),
+    ("kv", "Build", "EduVault, QuizArena, Farm2Home"),
+    ("gap",),
+    ("sec", "Stack"),
+    ("kv", "Languages", "Java, Python, C++, JS/TS, C"),
+    ("kv", "Frontend", "React, Vite, Tailwind, Figma"),
+    ("kv", "Backend", "Spring Boot, Flask, Firebase"),
+    ("kv", "AI / ML", "GenAI, LLMs, RAG, Jsoup"),
+    ("gap",),
+    ("sec", "Highlights"),
+    ("bul", "Built real-time apps for 200+ users"),
+    ("bul", "Cut hackathon reg latency by 35%"),
+]
 
-    <text x="20" y="215" fill="#58a6ff" font-weight="bold">PROJECTS</text>
-    <text x="120" y="215" fill="#c9d1d9">EduVault, QuizArena, Farm2Home</text>
 
-    <text x="20" y="250" fill="#58a6ff" font-weight="bold">STATS</text>
-    <text x="120" y="250" fill="#c9d1d9">200+ Live Users, 35% Latency Cut</text>
+def esc(s):
+    return html.escape(s)
 
-    <text x="20" y="285" fill="#58a6ff" font-weight="bold">LINKS</text>
-    <text x="120" y="285" fill="#79c0ff">adarshherwade.netlify.app</text>
 
-    <text x="20" y="330" fill="#7ee787" font-weight="bold">● ONLINE</text>
-    <text x="120" y="330" fill="#8b949e">Building scalable apps &amp; AI</text>
-  </g>
-</svg>"""
-    with open("info-card.svg", "w", encoding="utf-8") as f:
-        f.write(svg_content)
+def rise(inner, i):
+    if STATIC:
+        return f"<g>{inner}</g>"
+    delay = 0.15 + i * 0.06
+    return (f'<g opacity="0" transform="translate(0,5)">{inner}'
+            f'<animate attributeName="opacity" from="0" to="1" begin="{delay:.2f}s" dur="0.4s" fill="freeze"/>'
+            f'<animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" '
+            f'begin="{delay:.2f}s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></g>')
 
-if __name__ == "__main__":
-    create_info_card()
+
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+    f'font-family="\'Courier New\', Courier, monospace">',
+    '<defs>'
+    f'<linearGradient id="ibg" x1="0" y1="0" x2="0" y2="1">'
+    f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient></defs>',
+    f'<rect width="{W}" height="{H}" rx="12" fill="url(#ibg)"/>',
+    f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" stroke="{FRAME}"/>',
+    f'<line x1="0" y1="{TITLEBAR_H}" x2="{W}" y2="{TITLEBAR_H}" stroke="{FRAME}"/>',
+]
+for i, dotcol in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
+    parts.append(f'<circle cx="{PAD + i*16}" cy="{TITLEBAR_H/2}" r="5" fill="{dotcol}"/>')
+parts.append(f'<text x="{W/2}" y="{TITLEBAR_H/2 + 4}" fill="{MUTED}" font-size="12" '
+             f'text-anchor="middle">199adarsh@github: ~$ neofetch</text>')
+
+y = TITLEBAR_H + 30
+for i, row in enumerate(ROWS):
+    kind = row[0]
+    if kind == "gap":
+        y += LINE_H * 0.5
+        continue
+    if kind == "host":
+        inner = (f'<text x="{KEY_X}" y="{y:.1f}" font-size="14" font-weight="700">'
+                 f'<tspan fill="{GREEN}">199adarsh</tspan><tspan fill="{MUTED}">@</tspan>'
+                 f'<tspan fill="{ACCENT}">github</tspan></text>'
+                 f'<line x1="{KEY_X+140}" y1="{y-4:.1f}" x2="{W-PAD}" y2="{y-4:.1f}" '
+                 f'stroke="{FRAME}" stroke-opacity="0.8"/>')
+    elif kind == "sec":
+        title = esc(row[1])
+        inner = (f'<text x="{KEY_X}" y="{y:.1f}" fill="{SECTION}" font-size="12.5" font-weight="700">'
+                 f'&#8212; {title}</text>'
+                 f'<line x1="{KEY_X + 12 + len(row[1])*8}" y1="{y-4:.1f}" x2="{W-PAD}" y2="{y-4:.1f}" '
+                 f'stroke="{FRAME}" stroke-opacity="0.8"/>')
+    elif kind == "kv":
+        key, val = esc(row[1]), esc(row[2])
+        inner = (f'<text x="{KEY_X}" y="{y:.1f}" fill="{KEY}" font-size="12.5" font-weight="700">{key}</text>'
+                 f'<text x="{VAL_X}" y="{y:.1f}" fill="{INK}" font-size="12.5">{val}</text>')
+    elif kind == "bul":
+        txt = esc(row[1])
+        inner = (f'<circle cx="{KEY_X+3}" cy="{y-4:.1f}" r="2.5" fill="{GREEN}"/>'
+                 f'<text x="{KEY_X+14}" y="{y:.1f}" fill="{INK}" font-size="12.5">{txt}</text>')
+    else:
+        continue
+    parts.append(rise(inner, i))
+    y += LINE_H
+
+parts.append("</svg>")
+svg = "".join(parts)
+with open(OUT, "w", encoding="utf-8") as f:
+    f.write(svg)
+print("wrote", OUT, len(svg), "bytes")
