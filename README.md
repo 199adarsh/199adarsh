@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Courier+new&size=38&duration=2800&pause=1000&color=A78BFA&center=true&vCenter=true&width=860&lines=~ Adarsh+Herwade !;Java+Full+Stack+Developer;Java+%7C+Spring+Boot+%7C+CPP;Building+Useful+Products" alt="Typing SVG" />
+<!-- Lora -->
+<!-- Cormorant Garamond (thin & elegant) -->
+<img src="https://readme-typing-svg.herokuapp.com?font=Cormorant+Garamond&size=40&duration=2800&pause=1000&color=A78BFA&center=true&vCenter=true&width=950&lines=+Hi%2C+I'm+Adarsh+Herwade!;Java+Full+Stack+Developer;Java+%7C+Spring+Boot+%7C+C%2B%2B;+Building+Useful+Products!" alt="Typing SVG" />
 
 <br/>
 
