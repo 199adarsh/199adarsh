@@ -2,7 +2,7 @@
 
 <!-- Lora -->
 <!-- Cormorant Garamond (thin & elegant) -->
-<img src="https://readme-typing-svg.herokuapp.com?font=Cormorant+Garamond&size=40&duration=2800&pause=1000&color=A78BFA&center=true&vCenter=true&width=950&lines=+Hi%2C+I'm+Adarsh+Herwade!;Java+Full+Stack+Developer;Java+%7C+Spring+Boot+%7C+C%2B%2B;+Building+Useful+Products!" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Cormorant+Garamond&size=40&duration=2800&pause=1000&color=A78BFA&center=true&vCenter=true&width=950&lines=+Hi%2C+I'm+Adarsh+Herwade!;Java+Full+Stack+Developer;Java+%7C+Spring+Boot+%7C+C%2B%2B;+Building+Useful+Products!" alt="Typing SVG" width="100%" />
 
 <br/>
 
@@ -49,7 +49,7 @@ const favorites = [
 <div align="center">
 
 
-<img src="./info-card.svg" width="860" alt="Adarsh Herwade — experience, stack, highlights" />
+<img src="./info-card.svg" width="100%" alt="Adarsh Herwade — experience, stack, highlights" />
 
 </div>
 
@@ -60,9 +60,12 @@ const favorites = [
 
 A student-focused academic platform for notes, attendance, PYQs, roadmaps, and AI-assisted learning.
 
-| Stack | Scale | Performance | Security | Impact | Repository |
-|---|---|---|---|---|---|
-| React, Spring Boot, Jsoup | College-level platform | Fast UI and structured data flow | Institution-controlled access patterns | Centralized academic workflow | [EduVault](https://github.com/199adarsh/EduVault) |
+- **Stack**: React, Spring Boot, Jsoup
+- **Scale**: College-level platform
+- **Performance**: Fast UI and structured data flow
+- **Security**: Institution-controlled access patterns
+- **Impact**: Centralized academic workflow
+- **Repository**: [EduVault](https://github.com/199adarsh/EduVault)
 
 Built to make academic content easier to access, organize, and use in daily student workflows.
 
@@ -73,9 +76,12 @@ Built to make academic content easier to access, organize, and use in daily stud
 
 A realtime quiz platform built for live participation, synchronized scoring, and smooth event handling.
 
-| Stack | Scale | Performance | Security | Impact | Repository |
-|---|---|---|---|---|---|
-| TypeScript, Firebase | 200+ participants | Live score synchronization | Firebase-backed access control | Smooth live quiz experience | [DSSA-QuizArena](https://github.com/199adarsh/DSSA-QuizArena) |
+- **Stack**: TypeScript, Firebase
+- **Scale**: 200+ participants
+- **Performance**: Live score synchronization
+- **Security**: Firebase-backed access control
+- **Impact**: Smooth live quiz experience
+- **Repository**: [DSSA-QuizArena](https://github.com/199adarsh/DSSA-QuizArena)
 
 Designed for event usage where speed, stability, and clarity matter more than decoration.
 
@@ -86,9 +92,12 @@ Designed for event usage where speed, stability, and clarity matter more than de
 
 An AI-powered volunteering system for task management, attendance tracking, and reporting.
 
-| Stack | Scale | Performance | Security | Impact | Repository |
-|---|---|---|---|---|---|
-| HTML, Flask, Firebase, Gemini AI | Event / community scale | Realtime sync and low-latency handling | Google OAuth + Firebase auth | Better volunteer coordination | Private / On request |
+- **Stack**: HTML, Flask, Firebase, Gemini AI
+- **Scale**: Event / community scale
+- **Performance**: Realtime sync and low-latency handling
+- **Security**: Google OAuth + Firebase auth
+- **Impact**: Better volunteer coordination
+- **Repository**: Private / On request
 
 Focused on modular workflows, async handling, and practical coordination for teams.
 
@@ -99,9 +108,12 @@ Focused on modular workflows, async handling, and practical coordination for tea
 
 An AI-enabled agri marketplace with secure authentication and recommendation support.
 
-| Stack | Scale | Performance | Security | Impact | Repository |
-|---|---|---|---|---|---|
-| Flask, Firebase, Gemini AI | MVP / prototype | Efficient request handling | Firebase Authentication + Firestore | Smarter agri decision support | [Farm2Home](https://github.com/199adarsh/Farm2Home) |
+- **Stack**: Flask, Firebase, Gemini AI
+- **Scale**: MVP / prototype
+- **Performance**: Efficient request handling
+- **Security**: Firebase Authentication + Firestore
+- **Impact**: Smarter agri decision support
+- **Repository**: [Farm2Home](https://github.com/199adarsh/Farm2Home)
 
 Includes AI-based nutrition and pricing assistance to support better user decisions.
 
@@ -124,10 +136,10 @@ Includes AI-based nutrition and pricing assistance to support better user decisi
 
 <div align="center">
 
-<img src="./contrib-heatmap.svg" width="860" alt="199adarsh's GitHub contribution graph (Dec 2025 - Jul 2026)" />
+<img src="./contrib-heatmap.svg" width="100%" alt="199adarsh's GitHub contribution graph (Dec 2025 - Jul 2026)" />
 
 <br><br>
 
-<img src="./stats-card.svg" width="860" alt="199adarsh's GitHub analytics & stack share" />
+<img src="./stats-card.svg" width="100%" alt="199adarsh's GitHub analytics & stack share" />
 
 </div>
