@@ -109,6 +109,53 @@ def build_data(days):
 def main():
     days = fetch_days()
     data = build_data(days)
+
+    if os.path.exists(OUT_PATH):
+        try:
+            with open(OUT_PATH, "r", encoding="utf-8") as f:
+                old_data = json.load(f)
+
+            last_fetched = old_data.get("fetched_at", "")
+            if not last_fetched:
+                last_fetched = (datetime.datetime.utcnow() - datetime.timedelta(days=2)).isoformat() + "Z"
+
+            url = f"https://api.github.com/repos/{USERNAME}/{USERNAME}/commits?since={last_fetched}"
+            try:
+                resp = requests.get(url, headers={"User-Agent": "profile-readme-bot/1.0"}, timeout=30)
+                profile_counts = {}
+                if resp.status_code == 200:
+                    for c in resp.json():
+                        date_str = c["commit"]["author"]["date"][:10]
+                        profile_counts[date_str] = profile_counts.get(date_str, 0) + 1
+            except Exception as e:
+                print(f"Failed to fetch profile commits: {e}", file=sys.stderr)
+                profile_counts = {}
+
+            old_days = {d["date"]: d.get("count", 0) for d in old_data.get("days", [])}
+            new_days = {d["date"]: d.get("count", 0) for d in data.get("days", [])}
+
+            has_real_changes = False
+            for date_str, new_count in new_days.items():
+                old_count = old_days.get(date_str, 0)
+                if new_count - old_count > profile_counts.get(date_str, 0):
+                    has_real_changes = True
+                    break
+
+            if not has_real_changes:
+                for date_str, old_count in old_days.items():
+                    if old_count > new_days.get(date_str, 0):
+                        has_real_changes = True
+                        break
+
+            if not has_real_changes:
+                print("No contribution changes from other repos detected. Skipping update.")
+                if os.environ.get("GITHUB_ENV"):
+                    with open(os.environ["GITHUB_ENV"], "a") as env_file:
+                        env_file.write("SKIP_UPDATE=true\n")
+                sys.exit(0)
+        except Exception as e:
+            print(f"Could not check non-profile changes: {e}", file=sys.stderr)
+
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)

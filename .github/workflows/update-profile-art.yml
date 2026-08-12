@@ -21,10 +21,15 @@ jobs:
       - run: pip install -r scripts/requirements.txt
       - run: python scripts/fetch_contributions.py
       - run: python scripts/render_heatmap_svg.py
+        if: env.SKIP_UPDATE != 'true'
       - run: python scripts/make_info_card.py
+        if: env.SKIP_UPDATE != 'true'
       - run: python scripts/make_ascii_svg.py
+        if: env.SKIP_UPDATE != 'true'
       - run: python scripts/make_stats_card.py
+        if: env.SKIP_UPDATE != 'true'
       - uses: stefanzweifel/git-auto-commit-action@v5
+        if: env.SKIP_UPDATE != 'true'
         with:
           commit_message: "chore: refresh profile art & contribution graph [skip ci]"
           file_pattern: "data/contributions.json contrib-heatmap.svg info-card.svg adarsh-ascii.svg stats-card.svg"
