@@ -23,7 +23,7 @@
 
     <!-- Total Contributions -->
     <text x="0" y="32" fill="#ffa657" font-size="12.5" font-weight="700">Total Contributions</text>
-    <text x="210" y="32" fill="#3fb950" font-size="14" font-weight="700">716</text>
+    <text x="210" y="32" fill="#3fb950" font-size="14" font-weight="700">718</text>
 
     <!-- Longest Streak -->
     <text x="0" y="62" fill="#ffa657" font-size="12.5" font-weight="700">Longest Streak</text>
@@ -31,7 +31,7 @@
 
     <!-- Current Streak -->
     <text x="0" y="92" fill="#ffa657" font-size="12.5" font-weight="700">Current Streak</text>
-    <text x="210" y="92" fill="#3fb950" font-size="13" font-weight="700">0 days</text>
+    <text x="210" y="92" fill="#3fb950" font-size="13" font-weight="700">1 days</text>
   </g>
 
   <!-- Divider Line -->
