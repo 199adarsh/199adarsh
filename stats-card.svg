@@ -31,7 +31,7 @@
 
     <!-- Current Streak -->
     <text x="0" y="92" fill="#ffa657" font-size="12.5" font-weight="700">Current Streak</text>
-    <text x="210" y="92" fill="#3fb950" font-size="13" font-weight="700">4 days</text>
+    <text x="210" y="92" fill="#3fb950" font-size="13" font-weight="700">0 days</text>
   </g>
 
   <!-- Divider Line -->
