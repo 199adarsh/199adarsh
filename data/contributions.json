@@ -1,20 +1,20 @@
 {
   "username": "199adarsh",
-  "fetched_at": "2026-10-24T04:08:14.513264Z",
+  "fetched_at": "2026-10-25T04:10:31.360197Z",
   "range": {
-    "start": "2025-10-19",
-    "end": "2026-10-24"
+    "start": "2025-10-26",
+    "end": "2026-10-25"
   },
-  "total_contributions": 925,
-  "active_days": 171,
+  "total_contributions": 924,
+  "active_days": 170,
   "best_day": {
     "date": "2026-01-11",
     "count": 44
   },
   "current_streak": {
-    "length": 1,
+    "length": 2,
     "start": "2026-10-23",
-    "end": "2026-10-23"
+    "end": "2026-10-24"
   },
   "longest_streak": {
     "length": 46,
@@ -24,7 +24,7 @@
   "monthly": [
     {
       "month": "2025-10",
-      "total": 2
+      "total": 0
     },
     {
       "month": "2025-11",
@@ -72,38 +72,10 @@
     },
     {
       "month": "2026-10",
-      "total": 93
+      "total": 94
     }
   ],
   "days": [
-    {
-      "date": "2025-10-19",
-      "count": 0
-    },
-    {
-      "date": "2025-10-20",
-      "count": 0
-    },
-    {
-      "date": "2025-10-21",
-      "count": 1
-    },
-    {
-      "date": "2025-10-22",
-      "count": 0
-    },
-    {
-      "date": "2025-10-23",
-      "count": 0
-    },
-    {
-      "date": "2025-10-24",
-      "count": 1
-    },
-    {
-      "date": "2025-10-25",
-      "count": 0
-    },
     {
       "date": "2025-10-26",
       "count": 0
@@ -1558,6 +1530,10 @@
     },
     {
       "date": "2026-10-24",
+      "count": 1
+    },
+    {
+      "date": "2026-10-25",
       "count": 0
     }
   ]
